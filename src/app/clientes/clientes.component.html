@@ -1,0 +1,85 @@
+<h1>Clientes</h1>
+<div class="container d-flex me-2 p-3">
+  <input class="form-control me-2" type="search" placeholder="Buscar Cliente" aria-label="Search">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Añadir cliente
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Insertar datos cliente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="apellidos" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="apellidos">
+            </div>
+            <div class="mb-3">
+              <label for="pais" class="form-label">Pais</label>
+              <input type="text" class="form-control" id="pais">
+            </div>
+            <div class="mb-3">
+              <label for="dni" class="form-label">DNI</label>
+              <input type="text" class="form-control" id="dni">
+            </div>
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Telefono</label>
+              <input type="text" class="form-control" id="telefono">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center p-4">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Pais</th>
+            <th scope="col">NIE/DNI/Pasaporte</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Tipo de tramite</th>
+            <th scope="col">Cantidad de pagos</th>
+            <th scope="col">Comentario</th>
+          </tr>
+        </thead>
+        <tbody >
+            @for (item of clientes; track $index ) {
+                <tr>
+                  <td>{{item.nombre}}</td>
+                  <td>{{item.apellidos}}</td>
+                  <td>{{item.pais}}</td>
+                  <td>{{item.documentoNacional}}</td>
+                  <td>{{item.telefono}}</td>
+                  <td>{{item.tramite}}</td>
+                  <td>{{item.cantidadPago}}</td>
+                  <td>{{item.comentario}}</td>
+                </tr>
+              }
+      </table>
+      <ngb-pagination [collectionSize]="totalElements" [(page)]="p" [pageSize]="size" (pageChange)="onPageChange($event)"></ngb-pagination>
+      <!--<span>Page: {{p}} / {{totalPage}}</span>-->
+  </div>
+
+  <div>
+    
+  </div>
