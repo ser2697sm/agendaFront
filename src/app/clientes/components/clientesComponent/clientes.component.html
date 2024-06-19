@@ -1,0 +1,54 @@
+<h1>Clientes</h1>
+<div class="container d-flex me-2 p-3">
+  <input class="form-control me-2" type="search" placeholder="Buscar Cliente" aria-label="Search">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Añadir cliente
+  </button>
+</div>
+
+<!-- Modal -->
+<app-insertar-clientes-modal></app-insertar-clientes-modal>
+
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center p-4">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Pais</th>
+            <th scope="col">NIE/DNI/Pasaporte</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Tipo de tramite</th>
+            <th scope="col">Cantidad de pagos</th>
+            <th scope="col">Comentario</th>
+          </tr>
+        </thead>
+        <tbody >
+            @for (item of clientes; track $index ) {
+                <tr>
+                  <td>{{item.nombre}}</td>
+                  <td>{{item.apellidos}}</td>
+                  <td>{{item.pais}}</td>
+                  <td>{{item.documentoNacional}}</td>
+                  <td>{{item.telefono}}</td>
+                  <td>
+                  @for (tramite of item.tramite; track $index) {
+                      {{tramite.nombreTramite}}
+                    <br>
+                  }
+
+                </td>
+                  <!--<td>{{item.tramite}}</td>-->
+                  <td>{{item.cantidadPago}}</td>
+                  <td>{{item.comentario}}</td>
+                </tr>
+              }
+      </table>
+      <ngb-pagination [collectionSize]="totalElements" [(page)]="p" [pageSize]="size" (pageChange)="onPageChange($event)"></ngb-pagination>
+      <!--<span>Page: {{p}} / {{totalPage}}</span>-->
+  </div>
+
+  <div>
+    
+  </div>
