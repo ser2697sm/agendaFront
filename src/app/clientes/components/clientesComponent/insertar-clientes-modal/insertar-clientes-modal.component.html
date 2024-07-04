@@ -6,48 +6,87 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form [formGroup]="form" (ngSubmit)="onSubmmit()">
+          <form [formGroup]="formGroup" (ngSubmit)="onSubmmit()">
             <div class="mb-3">
               <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp" formControlName="nombre">
+              <input type="text" class ="form-control" id="nombre" formControlName="nombre" required>
+              @if (nombreField.errors?.['required']) {
+                <label for="floatingInputInvalid" class="mt-2 text-danger">Nombre requerido</label>
+              }
+              
             </div>
             <div class="mb-3">
               <label for="apellidos" class="form-label">Apellidos</label>
-              <input type="text" class="form-control" id="apellidos" formControlName="apellidos">
+              <input type="text" class="form-control" id="apellidos" formControlName="apellidos" required>
+              @if (apellidosField.errors?.['required']) {
+                <label for="floatingInputInvalid" class="mt-2 text-danger">Apellido requerido</label>
+              }
+              
             </div>
             <div class="mb-3">
               <label for="pais" class="form-label">Pais</label>
-              <input type="text" class="form-control" id="pais" formControlName="pais">
+              <input type="text" class="form-control" id="pais" formControlName="pais" required>
+              @if (paisField.errors?.['required']) {
+                <label for="floatingInputInvalid" class="mt-2 text-danger">Pais requerido</label>
+              }
             </div>
             <div class="mb-3">
               <label for="dni" class="form-label">DNI</label>
-              <input type="text" class="form-control" id="dni" formControlName="dni">
+              <input type="text" class="form-control" id="dni" formControlName="dni" required>
+              @if (dniField.errors?.['required']) {
+                <label for="floatingInputInvalid" class="mt-2 text-danger">DNI requerido</label>
+              }
             </div>
             <div class="mb-3">
               <label for="telefono" class="form-label">Telefono</label>
-              <input type="text" class="form-control" id="telefono" formControlName="telefono">
+              <input type="text" class="form-control" id="telefono" formControlName="telefono" required>
+            
+              @if(telefonoField.errors?.['invalidPhoneNumber'] && (telefonoField.dirty || telefonoField.touched)) {
+                <label for="floatingInputInvalid" class="mt-2 text-danger">Numero de telefono incorrecto:</label>
+                <label for="floatingInputInvalid" class="text-danger">Ejemplo de numero de telefono: +34654321234</label>
+              }
+
             </div>
 
-            <div class="mb-3">
-              <label for="telefono" class="form-label">Tipos de tramites:</label>
+           <div class="mb-3">
+              <label for="tramites" class="form-label">Tipos de tramites:</label>
              @for (item of tramites; track $index) {
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="valorTramites" formControlName="valorTramites">
-                <label class="form-check-label" for="flexCheckChecked" >
+                <input class="form-check-input" type="checkbox" value="" id="{{$index}}" ngModel="{{item}}" formControlName="valorTramites">
+                <label class="form-check-label" for="{{$index}}">
                   {{item}}
                 </label>
               </div>
+              
              }            
             </div>
+      
+          
+<!---
+          <div class="mb-3">
+              <label for="telefono" class="form-label">Tipos de tramites:</label>
+           
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="NACIONALIDADES" id="valorTramites" ngModel="NACIONALIDADES" formControlName="valorTramites">
+                <label class="form-check-label" for="valorTramites" >
+                  Nacionalidades
+                </label>
+              </div>
+                        
+            </div>
+--> 
             <div class="mb-3">
               <label for="cantidadPagos" class="form-label">Cantidad de pagos</label>
-              <input type="text" class="form-control" id="cantidadPagos" formControlName="cantidaPagos">
+              <input type="text" class="form-control" id="cantidadPagos" formControlName="cantidaPagos" required>
+              @if (cantidaPagosField.errors?.['required']) {
+                <label for="floatingInputInvalid" class="mt-2 text-danger">Pais requerido</label>
+              }
             </div>
             <div class="mb-2">
               <label for="cantidadPagos" class="form-label">Comentarios</label>
             </div>
             <div class="form-floating">
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" formControlName="comentario"></textarea>
+              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" formControlName="comentario" required></textarea>
               <label for="floatingTextarea2">Escriba un comentario sobre el cliente</label>
             </div>  
             

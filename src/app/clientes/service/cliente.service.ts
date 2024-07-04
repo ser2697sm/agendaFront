@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-   urlApi = "http://localhost:8080/api/clientes/verClientes";
+   urlApi = "http://localhost:8081/api/clientes/verClientes";
   constructor(private http:HttpClient) { }
 
   public getClientes(page:number,size:number): Observable<any> {
@@ -20,7 +20,7 @@ export class ApiService {
 
   //ver tramites sin repetir
   public getTramitesSinRepetir(): Observable<any> {
-    const urlApiCompleto = "http://localhost:8080/api/tramites/verTramitesSinDuplicar";
+    const urlApiCompleto = "http://localhost:8081/api/tramites/verTramitesSinDuplicar";
     console.log(urlApiCompleto);  
     return this.http.get(urlApiCompleto);
   }
