@@ -25,7 +25,7 @@ export class InsertarClientesModalComponent {
     pais: ['', Validators.required],
     dni: ['', Validators.required],
     telefono: ['', [Validators.required,CustomValidators.validationNumerodeTelefono]],
-    //valorTramites: ['', Validators.required],
+    valorTramites: ['', Validators.required],
     cantidaPagos: ['', Validators.required],
     comentario: ['', Validators.required]
   });

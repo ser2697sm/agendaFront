@@ -48,21 +48,38 @@
 
             </div>
 
-           <div class="mb-3">
+            <div class="mb-3">
               <label for="tramites" class="form-label">Tipos de tramites:</label>
-             @for (item of tramites; track $index) {
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="{{$index}}" ngModel="{{item}}" formControlName="valorTramites">
-                <label class="form-check-label" for="{{$index}}">
-                  {{item}}
-                </label>
+              <div class="row">
+                @for (item of tramites; track $index) {
+                <div class="col-md-6 form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="{{$index}}" ngModel="{{item}}"
+                    formControlName="valorTramites">
+                  <label class="form-check-label" for="{{$index}}">
+                    {{item.nombreTramite}}
+                  </label>
+                </div>
+                }
               </div>
-              
-             }            
             </div>
       
           
 <!---
+           <div class="mb-3" >
+            <label for="tramites" class="form-label">Tipos de tramites:</label>
+            <div class="row" formArrayName="arreglo">
+              @for (item of tramites; track $index) {
+              <div class="col-md-6 form-check">
+                <input class="form-check-input" type="checkbox" value="" id="{{$index}}" formControlName="valorTramite">
+                <label class="form-check-label" for="{{$index}}">
+                  {{item.nombreTramite}}
+                </label>
+              </div>
+          
+              }
+            </div>
+          </div>
+
           <div class="mb-3">
               <label for="telefono" class="form-label">Tipos de tramites:</label>
            
