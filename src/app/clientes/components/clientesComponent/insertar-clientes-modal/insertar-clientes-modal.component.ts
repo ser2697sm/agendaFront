@@ -15,6 +15,8 @@ export class InsertarClientesModalComponent {
   //form: FormGroup;
   tramites: any[] = [];
   validationCampo: String[] = [];
+  valor: String = '';
+  isChecked: boolean = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -25,7 +27,7 @@ export class InsertarClientesModalComponent {
     pais: ['', Validators.required],
     dni: ['', Validators.required],
     telefono: ['', [Validators.required,CustomValidators.validationNumerodeTelefono]],
-    valorTramites: ['', Validators.required],
+    valorTramites: [{}, Validators.required],
     cantidaPagos: ['', Validators.required],
     comentario: ['', Validators.required]
   });
@@ -35,17 +37,10 @@ export class InsertarClientesModalComponent {
   }
 
   onSubmmit() {
-    console.log("Formulario enviado");
-    console.log(this.formGroup.valid);
-    console.log(this.formGroup.value);
 
-    console.log(this.formGroup.controls.nombre.errors);
-    
-    
-    
+    console.log(this.formGroup.value);   
 
     if (this.formGroup.valid) {
-      console.log(this.formGroup.value);
    
       this.apiService.crearCliente(this.formGroup.value).subscribe((response) => {
         console.log(response);
@@ -58,8 +53,21 @@ export class InsertarClientesModalComponent {
   verTramitesSinRepetir() {
     this.apiService.getTramitesSinRepetir().subscribe((tramites: any) => {
       this.tramites = tramites;
+
+
+      const checked = {
+        checked : false
+      }
+      tramites.forEach((tramite: any) => { 
+        tramite.checked = false;
+      });
+
       console.log(tramites);
     });
+  }
+
+  guardarChecks(id: Number) {
+    console.log(id);
   }
 
   get nombreField() {  
@@ -89,47 +97,4 @@ export class InsertarClientesModalComponent {
   get comentarioField() {  
     return this.formGroup.controls.comentario; 
   }
-
-
-/*
-  validacionesFormulario() {
-      if(this.form.value.nombre == '') {
-        console.log("El campo nombre es obligatorio");
-        return this.validationCampo.push("El campo nombre es obligatorio");
-      }
-  
-      if(this.form.value.apellidos == '') {
-        console.log("El campo apellidos es obligatorio");
-        return this.validationCampo.push("El campo apellidos es obligatorio");
-      }
-  
-      if(this.form.value.pais == '') {
-        console.log("El campo pais es obligatorio");
-        return this.validationCampo.push( "El campo pais es obligatorio");
-      }
-  
-      if(this.form.value.dni == '') {
-        console.log("El campo dni es obligatorio");
-        return this.validationCampo.push("El campo dni es obligatorio") ;
-      }
-  
-      if(this.form.value.telefono == '') {
-        console.log("El campo telefono es obligatorio");
-        return this.validationCampo.push("El campo telefono es obligatorio") ;
-      }
-  
-      if(this.form.value.cantidaPagos == '') {
-        console.log("El campo cantidadPagos es obligatorio");
-        return this.validationCampo.push("El campo cantidadPagos es obligatorio") ;
-      }
-  
-      if(this.form.value.comentario == '') {
-        console.log("El campo comentario es obligatorio");
-        return this.validationCampo.push( "El campo comentario es obligatorio");
-      }
-  
-      // Add a return statement at the end of the function
-      return null;
-    }*/
-
 }

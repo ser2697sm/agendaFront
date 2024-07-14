@@ -21,7 +21,7 @@ export class ApiService {
   //ver tramites sin repetir
   public getTramitesSinRepetir(): Observable<any> {
     const urlApiCompleto = "http://localhost:3000/tramites/consultarDesplegableTramite";
-    //console.log(urlApiCompleto);  
+    //console.log(urlApiCompleto);
     return this.http.get(urlApiCompleto);
   }
 }
