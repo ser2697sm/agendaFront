@@ -13,6 +13,7 @@ import { CustomValidators } from './insertar-clientes-validators';
 export class InsertarClientesModalComponent {
   private readonly _formBuilder = inject(FormBuilder);
   //form: FormGroup;
+  listId: any[] = [];
   tramites: any[] = [];
   validationCampo: String[] = [];
   valor: String = '';
@@ -27,7 +28,7 @@ export class InsertarClientesModalComponent {
     pais: ['', Validators.required],
     dni: ['', Validators.required],
     telefono: ['', [Validators.required,CustomValidators.validationNumerodeTelefono]],
-    valorTramites: [{}, Validators.required],
+    valorTramites: [this.listId, Validators.required],
     cantidaPagos: ['', Validators.required],
     comentario: ['', Validators.required]
   });
@@ -36,12 +37,20 @@ export class InsertarClientesModalComponent {
     this.verTramitesSinRepetir();
   }
 
+  guardarChecks(id: Number,nombreTramite:String) {
+    var tramite = {
+      id: id,
+      nombre: nombreTramite
+    }
+    this.listId.push(tramite);
+  }
+
   onSubmmit() {
 
     console.log(this.formGroup.value);   
 
     if (this.formGroup.valid) {
-   
+      console.log(this.formGroup.value.valorTramites);
       this.apiService.crearCliente(this.formGroup.value).subscribe((response) => {
         console.log(response);
       });
@@ -66,9 +75,7 @@ export class InsertarClientesModalComponent {
     });
   }
 
-  guardarChecks(id: Number) {
-    console.log(id);
-  }
+
 
   get nombreField() {  
     return this.formGroup.controls.nombre; 
