@@ -50,10 +50,20 @@
 
             <div class="mb-3">
               <label for="tramites" class="form-label">Tipos de tramites:</label>
+              <select formControlName="tramites" class="form-select" aria-label="Default select example">
+                @for (item of tramites; track $index) {
+                  <option value="{{[item.idTramite,item.nombreTramite]}}">{{item.nombreTramite}}</option>
+                }
+              </select>
+            </div>
+           
+<!--
+            <div class="mb-3">
+              <label for="tramites" class="form-label">Tipos de tramites:</label>
               <div class="row">
                 @for (item of tramites; track $index) {
                 <div class="col-md-6 form-check">
-                  <input class="form-check-input" type="checkbox" (click)="guardarChecks(item.idTramite,item.nombreTramite)"  [ngModel]="isChecked"
+                  <input class="form-check-input" [value]="item.nombreTramite" type="checkbox" (change)="guardarChecks(item.id,item.nombreTramite)"  [(ngModel)]="item.isChecked"
                     formControlName="valorTramites">
                   <label class="form-check-label" for="{{$index}}">
                     {{item.nombreTramite}}
@@ -62,7 +72,7 @@
                 }
               </div>
             </div>
-      
+      -->
           
 <!---
            <div class="mb-3" >

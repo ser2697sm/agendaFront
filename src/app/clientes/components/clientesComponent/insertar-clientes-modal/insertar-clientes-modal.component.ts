@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ApiService } from '../../../service/cliente.service';
-import { FormControl, FormGroup, Validators,FormBuilder,ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup,FormArray, Validators,FormBuilder,ReactiveFormsModule } from '@angular/forms';
 import { CustomValidators } from './insertar-clientes-validators';
 
 @Component({
@@ -15,7 +15,7 @@ export class InsertarClientesModalComponent {
   //form: FormGroup;
   listId: any[] = [];
   tramites: any[] = [];
-  validationCampo: String[] = [];
+  //validationCampo: String[] = [];
   valor: String = '';
   isChecked: boolean = false;
 
@@ -28,7 +28,7 @@ export class InsertarClientesModalComponent {
     pais: ['', Validators.required],
     dni: ['', Validators.required],
     telefono: ['', [Validators.required,CustomValidators.validationNumerodeTelefono]],
-    valorTramites: [this.listId, Validators.required],
+    tramites: ["", Validators.required],
     cantidaPagos: ['', Validators.required],
     comentario: ['', Validators.required]
   });
@@ -36,21 +36,23 @@ export class InsertarClientesModalComponent {
   ngOnInit() {
     this.verTramitesSinRepetir();
   }
-
-  guardarChecks(id: Number,nombreTramite:String) {
+  guardarSelected(id:number) {
+    console.log(id)
+  }
+  /*guardarChecks(id: Number,nombreTramite:String) {
     var tramite = {
       id: id,
       nombre: nombreTramite
     }
     this.listId.push(tramite);
-  }
+  }*/
 
   onSubmmit() {
 
     console.log(this.formGroup.value);   
 
     if (this.formGroup.valid) {
-      console.log(this.formGroup.value.valorTramites);
+      console.log(this.formGroup.value.tramites);
       this.apiService.crearCliente(this.formGroup.value).subscribe((response) => {
         console.log(response);
       });

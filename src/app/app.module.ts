@@ -7,6 +7,7 @@ import { ClientesComponent } from './clientes/components/clientesComponent/clien
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -33,6 +34,7 @@ import { InsertarClientesModalComponent } from './clientes/components/clientesCo
         NgbAlertModule,
         NgbModule,
         ReactiveFormsModule,
+        FormsModule,
         InsertarClientesModalComponent
     ]
 })
